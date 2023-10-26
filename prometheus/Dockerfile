@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base system
 ARG BUILD_ARCH=amd64
-ENV PROMETHEUS_VERSION=2.48.0-rc.0
+ENV PROMETHEUS_VERSION=2.40.1
 
 # Copy root filesystem
 COPY rootfs /
@@ -18,15 +18,15 @@ RUN \
     && if [ "${BUILD_ARCH}" = "aarch64" ]; then ARCH="arm64"; fi \
     \
     && apk --no-cache add \
-        python3=3.11.6-r0 \
-        py3-idna=3.4-r4 \
-        py3-certifi=2023.7.22-r0 \
-        py3-chardet=5.1.0-r1 \
-        py3-yaml=6.0-r3 \
-        py3-urllib3=1.26.18-r0 \
-        py3-requests=2.31.0-r0 \
+        python3=3.10.12-r0 \
+        py3-idna=3.3-r2 \
+        py3-certifi=2021.10.8-r0 \
+        py3-chardet=4.0.0-r3 \
+        py3-yaml=6.0-r0 \
+        py3-urllib3=1.26.9-r0 \
+        py3-requests=2.27.1-r0 \
     && apk --no-cache add --virtual .builddeps \
-        py-pip=23.1.2-r0 \
+        py-pip=22.1.1-r0 \
     \
     && curl -J -L -o /tmp/prometheus.tar.gz \
         "https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.linux-${ARCH}.tar.gz" \
